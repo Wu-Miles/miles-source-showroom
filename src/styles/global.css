@@ -1,0 +1,325 @@
+/* src/styles/global.css */
+
+/* 1. 核心：引入 Tailwind v4 的全部基础样式与工具类 */
+@import "tailwindcss";
+
+/* 2. 写入我们的高定字体和全局滚动条样式 */
+body {
+  color: #fff;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* font-family: 'Plus Jakarta Sans', sans-serif;*/
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0B0B;
+}
+::-webkit-scrollbar-thumb {
+  background: #2C2C2C;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+/* ==================== 2. 分类楼层与自适应网格 ==================== */
+.showroom-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.category-section {
+  margin-bottom: 80px;
+}
+
+.category-header {
+  border-bottom: 1px solid #222;
+  padding-bottom: 16px;
+  margin-bottom: 32px;
+}
+
+.category-title {
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.category-title span {
+  color: #c9a063; /* 优雅的金色数字 */
+  margin-right: 8px;
+}
+
+/* 核心网格：完美自适应电脑与手机 */
+.pearl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+/* ==================== 3. 珍珠卡片样式 ==================== */
+.pearl-item-container {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pearl-item-container:hover {
+  transform: translateY(-5px);
+}
+
+.pearl-card-view {
+  background-color: #0a0a0a;
+  border: 1px solid #111;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.pearl-card-view .main-image {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 强制正方形，展示珍珠非常整齐 */
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.pearl-card-view h3 {
+  font-size: 1.1rem;
+  margin: 0 0 8px 0;
+}
+
+.pearl-card-view p {
+  font-size: 0.85rem;
+  color: #888;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.tags span {
+  background-color: #111;
+  border: 1px solid #222;
+  color: #c9a063;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  border-radius: 2px;
+}
+
+/* ==================== 4. 灯箱弹出层 (Modal) & 轮播样式 ==================== */
+.pearl-gallery-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(5px); /* 细微磨砂玻璃背景，高级感拉满 */
+}
+
+.slideshow-container {
+  max-width: 600px;
+  position: relative;
+  margin: 10vh auto;
+}
+
+.mySlides {
+  display: none;
+}
+
+.mySlides img {
+  border-radius: 6px;
+}
+
+.close-modal {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  /* color: #fff; */
+  /* font-size: 40px; */
+  cursor: pointer;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 16px;
+  /* color: white; */
+  font-weight: bold;
+  /* font-size: 24px; */
+  user-select: none;
+}
+
+.prev { left: -60px; }
+.next { right: -60px; }
+
+/* ==================== 5. 📱 手机端适配媒体查询 ==================== */
+@media (max-width: 768px) {
+  .showroom-wrapper {
+    padding: 30px 16px;
+  }
+  
+  .category-section {
+    margin-bottom: 50px;
+  }
+
+  .pearl-grid {
+    gap: 16px;
+  }
+
+  .slideshow-container {
+    max-width: 90%;
+    margin: 20vh auto;
+  }
+
+  /* 手机端左右箭头移动到图片内部，防止超出屏幕 */
+  .prev { left: 10px; }
+  .next { right: 10px; }
+  
+  .close-modal {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+/* 让轮播图切换速度更加清爽、高级 */
+.fade {
+  animation-name: fade;
+  animation-duration: 0.3s; /* 从 1.5s 优化为 0.3s */
+}
+
+@keyframes fade {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+/* 优化弹窗内部滚动容器 */
+.modal-scroll-wrapper {
+  scrollbar-width: none; /* Firefox 隐藏滚动条 */
+}
+.modal-scroll-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome/Safari 隐藏滚动条 */
+}
+
+/* 确保底部悬浮面板的磨砂过渡完美，并且在小屏幕上自动增加内阴影拉开层次 */
+.pearl-gallery-modal .absolute.bottom-0 {
+  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.6); /* 向上投射的柔和环境光阻，让磨砂边缘更高级 */
+}
+
+/* 移动端细微调优 */
+@media (max-width: 768px) {
+  .pearl-gallery-modal .absolute.bottom-0 {
+    background-color: rgba(10, 10, 10, 0.7) !important; /* 手机端半透明稍稍加深，防止背景珍珠光过亮刺眼 */
+  }
+}
+
+/* === 🏎️ 珍珠种类水平滑动轨道 === */
+.pearl-slider-container {
+  position: relative;
+  width: 100%;
+}
+
+.pearl-slider-track {
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* 隐藏 Firefox 滚动条 */
+  -ms-overflow-style: none;  /* 隐藏 IE/Edge 滚动条 */
+  padding: 12px 4px; /* 留出微弱卡片投影空间 */
+
+  /* 🎯 极其关键：彻底阻止 Mac 触控板划动触发浏览器返回/前进 */
+  overscroll-behavior-x: contain;
+}
+
+.pearl-slider-track::-webkit-scrollbar {
+  display: none; /* 隐藏 Chrome/Safari 滚动条 */
+}
+
+.pearl-card-wrapper {
+  flex: 0 0 calc((100% - 64px) / 3); /* 电脑端雷打不动放 3 个 */
+  min-width: 280px;
+}
+
+/* 🎯 侧边悬浮控制按钮：优雅地半嵌入轨道左右两侧 */
+.slider-side-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(18, 18, 18, 0.75); /* 磨砂暗黑背景 */
+  border: 1px solid rgba(120, 113, 108, 0.15); /* 极细边框 */
+  color: #a8a29e; /* 优雅的石灰色 */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px); /* 超高质感模糊 */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.slider-side-btn:hover {
+  color: #fff;
+  border-color: rgba(120, 113, 108, 0.5);
+  background-color: rgba(18, 18, 18, 0.9);
+  scale: 1.05;
+}
+
+/* 当划动到头时，按钮优雅淡出 */
+.slider-side-btn:disabled {
+  opacity: 0;
+  pointer-events: none;
+  scale: 0.9;
+}
+
+/* 🎯 按钮身位：稍微向两侧外溢，悬浮感更强 */
+.slider-side-btn.prev-btn {
+  left: -20px;
+}
+
+.slider-side-btn.next-btn {
+  right: -20px;
+}
+
+/* 🎯 顶奢大屏自适应（屏幕宽度大于 1280px 时启动） */
+/* 利用动态数学公式，确保按钮雷打不动地永远停在 “图集边缘” 与 “屏幕边缘” 的绝对正中央！ */
+@media (min-width: 1280px) {
+  .slider-side-btn.prev-btn {
+    left: calc(-25vw + 288px);
+  }
+  
+  .slider-side-btn.next-btn {
+    right: calc(-25vw + 288px);
+  }
+}
+
+/* 响应式调整卡片在轨道中的宽度 */
+@media (max-width: 1024px) {
+  .pearl-card-wrapper {
+    flex: 0 0 calc((100% - 32px) / 2); /* Tablet 端放 2 个 */
+  }
+}
+
+@media (max-width: 768px) {
+  .pearl-slider-track {
+    gap: 16px;
+  }
+  .pearl-card-wrapper {
+    flex: 0 0 82%; /* 移动端显示 1 个半卡片，暗示可以水平滑动 */
+  }
+}
+

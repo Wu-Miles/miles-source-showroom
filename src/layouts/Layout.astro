@@ -1,0 +1,86 @@
+---
+// src/layouts/Layout.astro
+
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Miles Source | Pearl Hunter & Curator", 
+  description = "Sourcing the ocean's most unique anomalies directly from Zhuji, China. Custom pearl hunting for indie jewelry designers." 
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO 元数据 -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <!-- 引入高级时尚字体：Playfair Display (优雅衬线体，适合标题) & Plus Jakarta Sans (现代无衬线体，适合正文) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <style is:global>
+      /* 定义全局字体与丝滑滚动 */
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      h1, h2, h3, h4, .font-serif {
+        font-family: 'Playfair Display', serif;
+      }
+      
+      /* 自定义滚动条，保持精致感 */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0B0B0B;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2C2C2C;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #444444;
+      }
+    </style>
+  </head>
+  
+  <!-- 使用极具奢华感和反光对比度的深色调背景 (Rich Charcoal/Off-Black) -->
+  <body class="bg-[#0B0B0B] text-[#E5E5E5] min-h-screen selection:bg-stone-800 selection:text-amber-200">
+    
+    <!-- 简易的导航栏：保持极简，突出品牌名 -->
+    <header class="border-b border-stone-900/80 backdrop-blur-md sticky top-0 z-50 bg-[#0B0B0B]/80">
+      <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="/" class="text-xl tracking-[0.25em] font-serif uppercase hover:text-stone-300 transition-colors">
+          Miles Source
+        </a>
+        <div class="flex items-center gap-6 text-sm tracking-widest uppercase text-stone-400">
+          <span class="text-stone-600">Zhuji, CN</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" title="Active Sourcing"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 核心内容插槽 -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
+      <slot /> <!-- 这里的 <slot /> 相当于 React 的 {children}，所有 index.astro 里的内容都会渲染到这里 -->
+    </main>
+
+    <!-- 极简页脚 -->
+    <footer class="border-t border-stone-950 py-12 text-center text-xs tracking-wider text-stone-600">
+      <p>© {new Date().getFullYear()} Miles Source. Sourced on Demand. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>
