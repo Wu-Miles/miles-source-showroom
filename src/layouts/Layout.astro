@@ -30,48 +30,42 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-
-    <style is:global>
-      /* 定义全局字体与丝滑滚动 */
-      body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-      }
-      h1, h2, h3, h4, .font-serif {
-        font-family: 'Playfair Display', serif;
-      }
-      
-      /* 自定义滚动条，保持精致感 */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0B0B0B;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #2C2C2C;
-        border-radius: 3px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #444444;
-      }
-    </style>
   </head>
   
   <!-- 使用极具奢华感和反光对比度的深色调背景 (Rich Charcoal/Off-Black) -->
   <body class="bg-[#0B0B0B] text-[#E5E5E5] min-h-screen selection:bg-stone-800 selection:text-amber-200">
     
     <!-- 简易的导航栏：保持极简，突出品牌名 -->
-    <header class="border-b border-stone-900/80 backdrop-blur-md sticky top-0 z-50 bg-[#0B0B0B]/80">
+    <header class="sticky top-0 z-50 bg-[#0B0B0B]/80 border-b border-stone-950/30 shadow-[0_15px_40px_rgba(0,0,0,0.9)] backdrop-blur-md">      
+      <!-- 🎯 直接利用你原有的这个完美容器，它负责把两端拉开 -->
       <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="/" class="text-xl tracking-[0.25em] font-serif uppercase hover:text-stone-300 transition-colors">
+        
+        <!-- 1️⃣ 左侧：独立流光大标题 -->
+        <a href="#" class="logo-shimmer text-xl tracking-[0.25em] font-serif uppercase select-none">
           Miles Source
         </a>
-        <div class="flex items-center gap-6 text-sm tracking-widest uppercase text-stone-400">
-          <span class="text-stone-600">Zhuji, CN</span>
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" title="Active Sourcing"></span>
+
+        <!-- 2️⃣ 右侧高定多元素组合：用 gap-8 让 Inquire 和 ZHUJI 优雅隔开 -->
+        <div class="flex items-center gap-8">
+          
+          <!-- 咨询按钮 -->
+          <button 
+            id="nav-inquire-btn"
+            class="text-[14px] uppercase tracking-[0.2em] font-mono font-medium text-[#E5C284] hover:text-[#FFF3D1] transition-colors duration-300 cursor-pointer select-none"
+          >
+            Inquire
+          </button>
+
+          <!-- 城市与状态呼吸灯 -->
+          <div class="flex items-center gap-2 text-stone-500 text-[11px] tracking-widest font-mono">
+            <span>ZHUJI, CN</span>
+            <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+          </div>
+          
         </div>
-      </div>
-    </header>
+
+      </div> <!-- 闭合第 40 行的 div -->
+    </header> <!-- 闭合第 39 行的 header -->
 
     <!-- 核心内容插槽 -->
     <main class="max-w-6xl mx-auto px-6 py-12">
@@ -82,5 +76,189 @@ const {
     <footer class="border-t border-stone-950 py-12 text-center text-xs tracking-wider text-stone-600">
       <p>© {new Date().getFullYear()} Miles Source. Sourced on Demand. All Rights Reserved.</p>
     </footer>
+
+    <!-- 🎯 优化后：位置上移至 bottom-16，并注入香槟金双层呼吸光晕 -->
+    <button 
+      id="flow-trigger" 
+      class="fixed bottom-16 right-8 z-50 flex items-center gap-2 px-4 py-3 bg-[#121212]/90 backdrop-blur-md border border-stone-800/60 hover:border-[#E5C284]/50 rounded-full text-stone-400 hover:text-[#E5C284] transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] group select-none"
+    >
+      
+      <!-- 🌟 核心视觉：香槟金呼吸外壳（绝对定位，只有它在优雅呼吸，不影响文字） -->
+      <div class="absolute inset-0 rounded-full border border-[#E5C284]/30 shadow-[0_0_15px_rgba(229,194,132,0.25)] animate-pulse pointer-events-none"></div>
+      
+      <!-- 猎手小指针（默认带一抹淡淡的香槟金） -->
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3.5 h-3.5 text-[#E5C284]/80 transition-transform duration-500 group-hover:rotate-45">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+      </svg>
+      
+      <span class="text-[10px] uppercase tracking-[0.25em] font-mono relative z-10">Process</span>
+    </button>
+    <script>
+      // 🛰️ 监听按钮点击，用纯 JS 触发滑行，绝不污染网址
+      document.getElementById('flow-trigger')?.addEventListener('click', () => {
+        document.getElementById('sourcing-flow')?.scrollIntoView({ 
+          behavior: 'smooth' 
+        });
+      });
+    </script>
+    <!-- 🌟 专属私密联络弹窗（默认隐藏 invisible opacity-0） -->
+    <div 
+      id="contact-modal" 
+      class="fixed inset-0 z-100 flex items-center justify-center invisible opacity-0 transition-all duration-500 select-none"
+    >
+      <!-- 暗黑遮罩背景（点击可关闭弹窗） -->
+      <div id="modal-overlay" class="absolute inset-0 bg-black/85 backdrop-blur-md"></div>
+      
+      <!-- 弹窗核心高定外壳 -->
+      <div class="relative w-full max-w-sm mx-4 bg-[#121212] border border-stone-900 rounded-2xl p-8 text-center shadow-[0_20px_50px_rgba(0,0,0,0.9)] transform scale-95 transition-transform duration-500" id="modal-content">
+        
+        <!-- 关闭按钮 -->
+        <button id="close-modal-btn" class="absolute top-4 right-4 text-stone-600 hover:text-[#E5C284] transition-colors cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <!-- 弹窗标题 -->
+        <h3 class="font-serif text-xl text-stone-200  tracking-widest mb-2">Bespoke Sourcing</h3>
+        <p class="text-[10px]  tracking-[0.2em] text-[#E5C284] mb-8">Connect with your pearl hunter</p>
+        
+        <!-- 联络通路列表 -->
+        <div class="flex flex-col gap-3">
+          <!-- 1️⃣ WhatsApp 复制框 -->
+          <div class="flex items-center justify-between px-5 py-4 bg-stone-950/40 border border-stone-900 rounded-xl text-stone-300 group relative transition-all duration-300 hover:border-[#E5C284]/20">
+            <div class="flex flex-col text-left">
+              <span class="font-mono text-xs tracking-widest uppercase text-stone-400">WhatsApp</span>
+              <span class="text-[11px] text-stone-300 mt-1 font-mono">+86 123 4567 8901</span> <!-- 💡 记得改成你的真实号码 -->
+            </div>
+            <button 
+              class="copy-btn text-[10px] text-stone-600 hover:text-[#E5C284] transition-colors cursor-pointer select-none"
+              data-copy="+8612345678901"
+            >
+              Copy
+            </button>
+          </div>
+          
+          <!-- 2️⃣ Instagram 复制框 -->
+          <div class="flex items-center justify-between px-5 py-4 bg-stone-950/40 border border-stone-900 rounded-xl text-stone-300 group relative transition-all duration-300 hover:border-[#E5C284]/20">
+            <div class="flex flex-col text-left">
+              <span class="font-mono text-xs tracking-widest uppercase text-stone-400">Instagram</span>
+              <span class="text-[11px] text-stone-300 mt-1 font-mono">miles_source</span>
+            </div>
+            <button 
+              class="copy-btn text-[10px] text-stone-600 hover:text-[#E5C284] transition-colors cursor-pointer select-none"
+              data-copy="miles_source"
+            >
+              Copy
+            </button>
+          </div>
+          
+          <!-- 3️⃣ Email 复制框 -->
+          <div class="flex items-center justify-between px-5 py-4 bg-stone-950/40 border border-stone-900 rounded-xl text-stone-300 group relative transition-all duration-300 hover:border-[#E5C284]/20">
+            <div class="flex flex-col text-left">
+              <span class="font-mono text-xs tracking-widest uppercase text-stone-400">Email</span>
+              <span class="text-[11px] text-stone-300 mt-1 font-mono">curator@milessource.com</span>
+            </div>
+            <button 
+              class="copy-btn text-[10px] text-stone-600 hover:text-[#E5C284] transition-colors cursor-pointer select-none"
+              data-copy="curator@milessource.com"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 🎯 替换 159-177 行的代码，用最现代的语法治好编译器的严格模式 -->
+    <script>
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        // 1. 换成箭头函数，彻底抛弃让人头疼的 this 上下文
+        btn.addEventListener('click', () => { 
+          const textToCopy = btn.getAttribute('data-copy');
+          
+          if (textToCopy) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+              // 2. 内部全部改用 btn 变量，安全、直观，且永远不会迷路
+              const originalText = btn.textContent;
+              btn.textContent = 'Copied!';
+              btn.classList.add('text-[#E5C284]');
+              
+              setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('text-[#E5C284]');
+              }, 1200);
+            });
+          }
+        });
+      });
+    </script>
+    <!-- 🛰️ 智能多路联动控制脚本 -->
+    <script>
+      const modal = document.getElementById('contact-modal');
+      const modalContent = document.getElementById('modal-content');
+      const openBtns = [
+        document.getElementById('nav-inquire-btn'),         // 顶部 Inquire 按钮
+        document.getElementById('start-sourcing-btn')       // 底部巨幕大卡片按钮（待绑定）
+      ];
+      const closeBtns = [
+        document.getElementById('close-modal-btn'),
+        document.getElementById('modal-overlay')
+      ];
+
+      // 开启弹窗魔法
+      openBtns.forEach(btn => {
+        btn?.addEventListener('click', (e) => {
+          e.preventDefault();
+          modal?.classList.remove('invisible', 'opacity-0');
+          modalContent?.classList.remove('scale-95');
+        });
+      });
+
+      // 关闭弹窗机制
+      closeBtns.forEach(btn => {
+        btn?.addEventListener('click', () => {
+          modal?.classList.add('opacity-0');
+          modalContent?.classList.add('scale-95');
+          setTimeout(() => modal?.classList.add('invisible'), 500);
+        });
+      });
+    </script>
   </body>
 </html>
+
+<style is:global>
+  /* 🌟 香槟金丝绸流光核心控制 */
+  .logo-shimmer {
+    /* 1. 调配一道流光纯金渐变带 */
+    background: linear-gradient(
+      to right, 
+      #F5F5F4 20%,   /* 基础高亮银白 */
+      #E5C284 40%,   /* 丝滑香槟金 */
+      #FFF3D1 50%,   /* 钻石般的核心反光点 */
+      #E5C284 60%,   /* 丝滑香槟金 */
+      #F5F5F4 80%    /* 回归基底银白 */
+    );
+    
+    /* 2. 把背景画布拉长到 200% 宽度，给流动预留长轨道 */
+    background-size: 200% auto;
+    
+    /* 3. 终极魔法：把金光裁剪到只有文字能露出来，其余地方透明 */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* 4. 绑定呼吸流光动画：6秒一个周期，无限循环，线性匀速 */
+    animation: goldSweep 6s linear infinite;
+  }
+
+  /* 🎬 定义金光横扫的物理轨迹 */
+  @keyframes goldSweep {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: -200% center; /* 往左拉动两倍画布，形成光芒向右流淌的视觉 */
+    }
+  }
+</style>

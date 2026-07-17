@@ -12,11 +12,9 @@ interface Props {
 
 const { id, title, teaser, images, specs, inspiration } = Astro.props;
 
-const instagramUsername = "miles_source";
-const dmLink = `https://ig.me/m/${instagramUsername}`;
 ---
 
-<!-- 1. 外部列表卡片（去掉了 overflow-hidden 和底栏按钮） -->
+<!-- 1. 外部列表卡片 -->
 <div 
   class="pearl-item-container group relative transition-all duration-500 h-full" 
   data-pearl-id={id}
@@ -25,7 +23,7 @@ const dmLink = `https://ig.me/m/${instagramUsername}`;
   <div class="pearl-card-view js-card-trigger cursor-pointer bg-[#121212] border border-stone-900/60 rounded-xl p-6 hover:border-stone-800 transition-all duration-500 flex flex-col justify-between h-full">
     
     <!-- 叠放图集区域 -->
-    <div class="relative w-full aspect-[4/5] bg-transparent mb-6 p-3">
+    <div class="relative w-full aspect-4/5 bg-transparent mb-6 p-3">
       <!-- 底层照片 2 -->
       {images[2] && (
         <div class="absolute inset-3 rounded-lg overflow-hidden border border-stone-800/30 bg-stone-950 transform -rotate-3 -translate-y-2 -translate-x-1.5 opacity-30 transition-all duration-500 group-hover:-rotate-6 group-hover:-translate-y-4 group-hover:-translate-x-3.5 group-hover:opacity-50">
@@ -40,7 +38,7 @@ const dmLink = `https://ig.me/m/${instagramUsername}`;
         </div>
       )}
 
-      <!-- 顶层主图（去掉了左上角悬浮的 Extreme 标签） -->
+      <!-- 顶层主图 -->
       <div class="absolute inset-3 rounded-lg overflow-hidden border border-stone-900/80 bg-stone-950 shadow-2xl transition-all duration-500 group-hover:scale-[1.01] z-10">
         <img 
           src={images[0]} 
@@ -48,7 +46,7 @@ const dmLink = `https://ig.me/m/${instagramUsername}`;
           class="w-full h-full object-cover" 
           loading="lazy"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-50"></div>
+        <div class="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-50"></div>
       </div>
     </div>
 
@@ -63,11 +61,11 @@ const dmLink = `https://ig.me/m/${instagramUsername}`;
     </div>
   </div>
 
-  <!-- 2. 奢华大图弹窗（去掉了生硬的烟雾层，保持大图全屏展示） -->
-  <div class="pearl-gallery-modal hidden fixed inset-0 z-[9999] bg-black/95" id={`${id}-modal`}>
+  <!-- 2. 奢华大图弹窗 -->
+  <div class="pearl-gallery-modal hidden fixed inset-0 z-9999 bg-black/95" id={`${id}-modal`}>
     
     <!-- 关闭按钮 -->
-    <span class="close-modal js-close-modal absolute top-6 right-8 z-50 !text-white/20 hover:!text-white/90 text-5xl md:text-6xl font-extralight cursor-pointer p-6 transition-colors select-none">&times;</span>
+    <span class="close-modal js-close-modal absolute top-6 right-8 z-50 text-white/20 hover:text-white/90 text-5xl md:text-6xl font-extralight cursor-pointer p-6 transition-colors select-none">&times;</span>
 
     <div class="relative h-full w-full overflow-hidden flex flex-col justify-between">
       
@@ -76,14 +74,14 @@ const dmLink = `https://ig.me/m/${instagramUsername}`;
         
         <!-- 左右切换自适应中点箭头 -->
         <a 
-          class="prev js-prev hidden lg:flex absolute top-1/2 -translate-y-1/2 !text-white/15 hover:!text-white/95 text-6xl xl:text-7xl font-light cursor-pointer select-none !p-12 transition-all z-30 items-center justify-center"
+          class="prev js-prev hidden lg:flex absolute top-1/2 -translate-y-1/2 text-white/15 hover:text-white/95 text-6xl xl:text-7xl font-light cursor-pointer select-none p-12 transition-all z-30 items-center justify-center"
           style="left: calc(25vw - 192px);"
         >
           &#10094;
         </a>
         
         <a 
-          class="next js-next hidden lg:flex absolute top-1/2 -translate-y-1/2 !text-white/15 hover:!text-white/95 text-6xl xl:text-7xl font-light cursor-pointer select-none !p-12 transition-all z-30 items-center justify-center"
+          class="next js-next hidden lg:flex absolute top-1/2 -translate-y-1/2 text-white/15 hover:text-white/95 text-6xl xl:text-7xl font-light cursor-pointer select-none p-12 transition-all z-30 items-center justify-center"
           style="right: calc(25vw - 192px);"
         >
           &#10095;
@@ -123,17 +121,6 @@ const dmLink = `https://ig.me/m/${instagramUsername}`;
                 ))}
               </div>
             )}
-
-            <div class="pt-2">
-              <a 
-                href={dmLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="text-[10px] uppercase tracking-[0.2em] text-amber-500/80 hover:text-amber-400 transition-colors inline-flex items-center gap-1.5 border-b border-amber-500/20 hover:border-amber-500/60 pb-0.5"
-              >
-                Inquire Specimen <span class="text-xs">→</span>
-              </a>
-            </div>
           </div>
 
           <!-- 【右边 2/3 区域】 -->

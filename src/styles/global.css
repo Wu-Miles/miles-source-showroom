@@ -38,7 +38,7 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .category-section {
-  margin-bottom: 80px;
+  margin-bottom: 20px;
 }
 
 .category-header {
@@ -50,7 +50,6 @@ h1, h2, h3, h4, .font-serif {
 .category-title {
   font-size: 1.6rem;
   letter-spacing: 2px;
-  text-transform: uppercase;
   margin: 0;
 }
 

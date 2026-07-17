@@ -14,40 +14,46 @@ const categories = [...new Set(pearlsData.map(item => item.category))];
 <Layout title="Miles Source | Custom Pearl Hunter & Curator">
   {/* 1. 极简奢华的 Hero 区域 */}
   <section class="py-20 text-center md:py-28">
-    <div class="max-w-3xl mx-auto">
-      <span class="text-xs uppercase tracking-[0.4em] text-stone-500 font-semibold block mb-4">
-        Bespoke Pearl Hunting
-      </span>
-      <h1 class="text-4xl md:text-6xl font-serif text-stone-100 tracking-wide mb-6 leading-[1.15]">
-        Curating Nature's <br class="hidden md:inline" />
-        <span class="italic text-stone-400">Beautiful Anomalies</span>
+    <!-- 🎯 调整后的现代社论风排版结构 -->
+    <div class="text-center max-w-3xl mx-auto px-4">
+
+      <h1 class="text-4xl md:text-6xl font-serif text-stone-100 tracking-wide leading-tight">
+        Curating Nature's <br />
+        <span class="logo-shimmer italic font-light">Beautiful Anomalies</span>
       </h1>
-      <p class="text-xs md:text-sm text-stone-400 font-light leading-relaxed max-w-xl mx-auto">
-        Every baroque pearl carries its own unique poetry. We don't sell standardized stock. We scour the depths of the Zhuji market to hunt down the specific organic contours and mirror luster that ignite your next jewelry sketch.
+
+      <p class="text-[10px] md:text-xs uppercase tracking-[0.3em] font-mono text-stone-500 mt-5 mb-8 select-none">
+        Bespoke Pearl Hunting
       </p>
+
+      <p class="text-sm md:text-base text-stone-400 font-light leading-relaxed max-w-2xl mx-auto opacity-90">
+        Every baroque pearl carries its own unique poetry. We don't sell standardized stock. 
+        We scour the depths of the Zhuji market to hunt down the specific organic contours 
+        and mirror luster that ignite your next jewelry sketch.
+      </p>
+
     </div>
   </section>
 
   {/* 2. 展厅（Showroom）展示墙 */}
   <section id="showroom" class="scroll-mt-24">
-    <div class="flex items-center justify-between border-b border-stone-900/80 pb-4 mb-10">
-      <h2 class="text-xs uppercase tracking-[0.25em] text-stone-400 font-semibold">
+    <div class="flex items-center justify-between border-b border-stone-900/80 pb-4 mb-0">
+      <h2 class="text-[16px] uppercase tracking-[0.25em] text-stone-400 font-semibold">
         Digital Showroom
       </h2>
-      <span class="text-[9px] uppercase tracking-widest text-stone-500 flex items-center gap-2">
+      <span class="text-[16px] uppercase tracking-widest text-stone-500 flex items-center gap-2">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500/80"></span>
         Live Sourcing Active
       </span>
     </div>
 
-    <div class="showroom-wrapper space-y-16">
+    <div class="showroom-wrapper flex flex-col gap-5">
       {categories.map((category, index) => {
         const filteredPearls = pearlsData.filter(item => item.category === category);
         
         return (
           <section class="category-section" id={`section-${index}`}>
-            {/* 🎯 头部：恢复最干净的标题，移除旧按钮 */}
-            <div class="category-header border-b border-stone-900/40 pb-4 mb-8 text-left">
+            <div class="category-header border-b border-stone-900/40 pb-4 mb-1 text-left">
               <h2 class="category-title text-base md:text-lg font-serif text-stone-100 tracking-wide">
                 <span class="text-amber-500/80 mr-2 font-mono">{String(index + 1).padStart(2, '0')} /</span> {category}
               </h2>
@@ -172,7 +178,7 @@ const categories = [...new Set(pearlsData.map(item => item.category))];
       
       container.addEventListener('touchend', (e) => {
         touchEndX = (e as TouchEvent).changedTouches[0].screenX;
-        handleSwipe(container);
+        handleSwipe(container as HTMLElement);
       }, { passive: true });
       
       function handleSwipe(el: HTMLElement) {
