@@ -41,25 +41,26 @@ const {
       <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
         
         <!-- 1️⃣ 左侧：独立流光大标题 -->
-        <a href="#" class="logo-shimmer text-xl tracking-[0.25em] font-serif uppercase select-none">
+        <a href="#" class="logo-shimmer text-base md:text-xl tracking-[0.15em] md:tracking-[0.25em] font-serif uppercase select-none">
           Miles Source
         </a>
 
         <!-- 2️⃣ 右侧高定多元素组合：用 gap-8 让 Inquire 和 ZHUJI 优雅隔开 -->
-        <div class="flex items-center gap-8">
+        <div class="flex items-center gap-4 md:gap-8">
           
           <!-- 咨询按钮 -->
           <button 
             id="nav-inquire-btn"
-            class="text-[14px] uppercase tracking-[0.2em] font-mono font-medium text-[#E5C284] hover:text-[#FFF3D1] transition-colors duration-300 cursor-pointer select-none"
+            class="text-[11px] md:text-[14pm] uppercase tracking-[0.15em] md:tracking-[0.2em] font-mono font-medium 
+            text-[#E5C284] hover:text-[#FFF3D1] transition-colors duration-300 cursor-pointer select-none"
           >
             Inquire
           </button>
 
           <!-- 城市与状态呼吸灯 -->
-          <div class="flex items-center gap-2 text-stone-500 text-[11px] tracking-widest font-mono">
+          <div class="flex items-center gap-2 text-stone-500 text-[10px] md:text-[11px] tracking-widest font-mono">
             <span>ZHUJI, CN</span>
-            <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+            <span class="w-1 md:w-1.5 h-1 md:h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
           </div>
           
         </div>
@@ -84,7 +85,8 @@ const {
     >
       
       <!-- 🌟 核心视觉：香槟金呼吸外壳（绝对定位，只有它在优雅呼吸，不影响文字） -->
-      <div class="absolute inset-0 rounded-full border border-[#E5C284]/30 shadow-[0_0_15px_rgba(229,194,132,0.25)] animate-pulse pointer-events-none"></div>
+      <div class="absolute inset-0 rounded-full border border-[#E5C284]/30 shadow-[0_0_15px_rgba(229,194,132,0.25)] animate-pulse pointer-events-none">
+      </div>
       
       <!-- 猎手小指针（默认带一抹淡淡的香槟金） -->
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3.5 h-3.5 text-[#E5C284]/80 transition-transform duration-500 group-hover:rotate-45">

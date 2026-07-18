@@ -44,3 +44,4 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 
 测试 启动 ： npm run dev
+测试 局域网可访问： npm run dev -- --host

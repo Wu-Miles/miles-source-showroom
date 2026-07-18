@@ -2,6 +2,7 @@
   {
     "id": "baroque-001",
     "title": "Ultra-Luster Flame Baroque",
+    "code": "A001",
     "category": "Large Baroque",
     "tags": ["Extreme Mirror Luster"],
     "teaser": "Thick nacre with stunning metallic rainbow overtones. Perfectly organic shape.",
@@ -22,6 +23,7 @@
   {
     "id": "baroque-002",
     "title": "Ultra-Luster Flame Baroque",
+    "code": "A002",
     "category": "Large Baroque",
     "tags": ["Extreme Mirror Luster"],
     "teaser": "Thick nacre with stunning metallic rainbow overtones. Perfectly organic shape.",
@@ -40,6 +42,7 @@
   },
     {
     "id": "baroque-002",
+    "code": "A003",
     "title": "Ultra-Luster Flame Baroque",
     "category": "Large Baroque",
     "tags": ["Extreme Mirror Luster"],
@@ -59,6 +62,7 @@
   },
     {
     "id": "baroque-002",
+    "code": "A004",
     "title": "Ultra-Luster Flame Baroque",
     "category": "Large Baroque",
     "tags": ["Extreme Mirror Luster"],
@@ -78,6 +82,7 @@
   },
   {
     "id": "baroque-003",
+    "code": "B001",
     "title": "Ultra-Luster Flame Baroque",
     "category": "Little Baroque",
     "tags": ["Extreme Mirror Luster"],

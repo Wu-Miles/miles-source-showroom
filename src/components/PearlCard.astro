@@ -2,6 +2,7 @@
 // src/components/PearlCard.astro
 interface Props {
   id: string;
+  code: string;
   title: string;
   tags: string[];
   teaser: string; // 列表页的一句话简述
@@ -10,7 +11,7 @@ interface Props {
   inspiration?: string; // 右侧 2/3 的灵魂灵感文案
 }
 
-const { id, title, teaser, images, specs, inspiration } = Astro.props;
+const { id, code, title, teaser, images, specs, inspiration } = Astro.props;
 
 ---
 
@@ -19,6 +20,11 @@ const { id, title, teaser, images, specs, inspiration } = Astro.props;
   class="pearl-item-container group relative transition-all duration-500 h-full" 
   data-pearl-id={id}
 >
+  <div class="relative z-10 flex justify-between items-center mb-3 px-1 select-none">
+    <span class="text-[12px] font-mono uppercase tracking-[0.2em] text-[#E5C284] transition-colors duration-300">
+      Ref. {code}
+    </span>
+  </div>
   <!-- 卡片主视图 -->
   <div class="pearl-card-view js-card-trigger cursor-pointer bg-[#121212] border border-stone-900/60 rounded-xl p-6 hover:border-stone-800 transition-all duration-500 flex flex-col justify-between h-full">
     
@@ -61,88 +67,90 @@ const { id, title, teaser, images, specs, inspiration } = Astro.props;
     </div>
   </div>
 
-  <!-- 2. 奢华大图弹窗 -->
-  <div class="pearl-gallery-modal hidden fixed inset-0 z-9999 bg-black/95" id={`${id}-modal`}>
+<!-- 2. 奢华大图弹窗 -->
+<div class="pearl-gallery-modal hidden fixed inset-0 z-9999 bg-black/95 h-screen w-screen overflow-hidden" id={`${id}-modal`}>
+  
+  <!-- 关闭按钮（保持绝对定位在全屏最右上角） -->
+  <span class="close-modal js-close-modal absolute top-6 right-8 z-50 text-white/20 hover:text-white/90 text-5xl md:text-6xl font-extralight cursor-pointer p-6 transition-colors select-none">&times;</span>
+
+  <!-- 🎯 外壳：强制改成 flex-col，锁死一屏高度 -->
+  <div class="relative h-full w-full flex flex-col overflow-hidden">
     
-    <!-- 关闭按钮 -->
-    <span class="close-modal js-close-modal absolute top-6 right-8 z-50 text-white/20 hover:text-white/90 text-5xl md:text-6xl font-extralight cursor-pointer p-6 transition-colors select-none">&times;</span>
+    <!-- 🖼️ 【上半部分图集区域 -->
+    <div class="w-full flex-1 min-h-0 flex iflex-col justify-end pb-8 px-6 md:p-10 relative z-10">
 
-    <div class="relative h-full w-full overflow-hidden flex flex-col justify-between">
-      
-      <!-- 【上半部分图集区域】 -->
-      <div class="w-full h-full flex items-center justify-center p-4 pb-[42vh] md:pb-[35vh] relative z-10">
-        
-        <!-- 左右切换自适应中点箭头 -->
-        <a 
-          class="prev js-prev hidden lg:flex absolute top-1/2 -translate-y-1/2 text-white/15 hover:text-white/95 text-6xl xl:text-7xl font-light cursor-pointer select-none p-12 transition-all z-30 items-center justify-center"
-          style="left: calc(25vw - 192px);"
-        >
-          &#10094;
-        </a>
-        
-        <a 
-          class="next js-next hidden lg:flex absolute top-1/2 -translate-y-1/2 text-white/15 hover:text-white/95 text-6xl xl:text-7xl font-light cursor-pointer select-none p-12 transition-all z-30 items-center justify-center"
-          style="right: calc(25vw - 192px);"
-        >
-          &#10095;
-        </a>
-
-        <!-- 幻灯片容器 -->
-        <div class="slideshow-container w-full max-w-3xl relative">
-          {images.map((imgUrl, index) => (
-            <div class="mySlides fade hidden">
-              <img 
-                src={imgUrl} 
-                alt={`${title} - Angle ${index + 1}`} 
-                class="w-full max-h-[48vh] md:max-h-[55vh] object-contain rounded-lg mx-auto select-none pointer-events-none" 
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- 【下半部分 1/3 磨砂双栏面板】 -->
-      <div 
-        class="absolute bottom-0 left-0 w-full h-[38vh] md:h-[32vh] z-20 bg-[#0B0B0B]/90 backdrop-blur-2xl px-6 py-10 md:px-16 md:py-12 overflow-y-auto"
+      <!-- 左右切换自适应中点箭头（现在它们会完美在「大图安全岛」的垂直正中心居中，极其优雅） -->
+      <a 
+        class="prev js-prev hidden lg:flex absolute top-1/2 -translate-y-1/2 text-white/15 hover:text-white/95 text-6xl xl:text-7xl font-light cursor-pointer select-none p-12 transition-all z-30 items-center justify-center"
+        style="left: calc(25vw - 192px);"
       >
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start max-w-6xl mx-auto h-full">
+        &#10094;
+      </a>
+      
+      <a 
+        class="next js-next hidden lg:flex absolute top-1/2 -translate-y-1/2 text-white/15 hover:text-white/95 text-6xl xl:text-7xl font-light cursor-pointer select-none p-12 transition-all z-30 items-center justify-center"
+        style="right: calc(25vw - 192px);"
+      >
+        &#10095;
+      </a>
+      
+      <!-- 幻灯片容器（注入 h-full，允许把高度边界垂直向下传递给图片） -->
+      <div class="slideshow-container w-full max-w-3xl h-full flex items-center justify-center relative">
+        {images.map((imgUrl, index) => (
+          /* 🎯 关键细节：幻灯片单页也撑满，并用 flex 居中，为大图搭建完美的计算温床 */
+          <div class="mySlides fade hidden h-full w-full items-center justify-center">
+            <img 
+              src={imgUrl} 
+              alt={`${title} - Angle ${index + 1}`} 
+              class="max-w-full max-h-full object-contain rounded-lg mx-auto select-none pointer-events-none drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)]" 
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 📝 【下半部分 1/3 磨砂双栏面板】 -->
+
+    <div 
+      class="shrink-0 w-full h-[28vh] sm:h-[30vh] md:h-[32vh] z-20 bg-[#0B0B0B]/90 backdrop-blur-2xl px-6 pt-6 pb-10 md:px-16 md:py-12 overflow-y-auto border-t border-stone-900/60"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start max-w-6xl mx-auto h-full">
+        
+        <!-- 【左边 1/3 区域】 -->
+        <div class="md:col-span-4 space-y-4 text-left">
+          <h2 class="text-xl md:text-2xl font-serif text-stone-100 tracking-wide leading-tight">{title}</h2>
           
-          <!-- 【左边 1/3 区域】 -->
-          <div class="md:col-span-4 space-y-4 text-left">
-            <h2 class="text-xl md:text-2xl font-serif text-stone-100 tracking-wide leading-tight">{title}</h2>
+          {specs && (
+            <div class="space-y-1.5 text-[10px] md:text-xs">
+              {Object.entries(specs).map(([key, value]) => (
+                <div class="flex justify-between border-b border-stone-900/40 pb-1">
+                  <span class="text-stone-500 tracking-wider">{key}</span>
+                  <span class="text-stone-300 font-medium">{value}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- 【右边 2/3 区域】 -->
+        <div class="md:col-span-8 text-left h-full flex flex-col justify-center">
+          <div class="space-y-4">
+            <div class="flex items-center gap-2 text-stone-500 text-[10px] md:text-xs uppercase tracking-[0.25em] font-mono select-none mb-3">
+              <span class="w-1.5 h-1.5 bg-[#E5C284] rounded-full animate-pulse shrink-0"></span>
+              <span class="text-[12px] uppercase tracking-[0.25em] text-stone-500 font-bold">Curator's Voice</span>
+            </div>
             
-            {specs && (
-              <div class="space-y-1.5 text-[10px] md:text-xs">
-                {Object.entries(specs).map(([key, value]) => (
-                  <div class="flex justify-between border-b border-stone-900/40 pb-1">
-                    <span class="text-stone-500 uppercase tracking-wider">{key}</span>
-                    <span class="text-stone-300 font-medium">{value}</span>
-                  </div>
-                ))}
-              </div>
+            {inspiration && (
+              <p class="text-xs md:text-sm text-stone-300 font-light leading-relaxed italic border-l border-stone-900/80 pl-6 py-1">
+                "{inspiration}"
+              </p>
             )}
           </div>
-
-          <!-- 【右边 2/3 区域】 -->
-          <div class="md:col-span-8 text-left h-full flex flex-col justify-center">
-            <div class="space-y-4">
-              <div class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-stone-700"></span>
-                <span class="text-[9px] uppercase tracking-[0.25em] text-stone-500 font-bold">Curator's Voice</span>
-              </div>
-              
-              {inspiration && (
-                <p class="text-xs md:text-sm text-stone-300 font-light leading-relaxed italic border-l border-stone-900/80 pl-6 py-1">
-                  "{inspiration}"
-                </p>
-              )}
-            </div>
-          </div>
-
         </div>
 
       </div>
-
     </div>
+
   </div>
+</div>
 </div>

@@ -40,7 +40,7 @@ const flowSteps = [
     </p>
   </div>
 
-<!-- 🎯 3列 4:5 顶级画廊矩阵 -->
+    <!-- 🎯 3列 4:5 顶级画廊矩阵 -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
       {flowSteps.map((step) => (
         <div class="group flex flex-col">
@@ -78,11 +78,16 @@ const flowSteps = [
     <div class="inline-flex flex-col items-center p-8 bg-linear-to-b from-[#161616] to-[#0D0D0D] border border-stone-900 rounded-2xl max-w-xl mx-auto">
       <h4 class="text-md font-serif text-stone-200 tracking-wider mb-2">Ready to find your next muse?</h4>
       <p class="text-xs text-stone-500 mb-6 font-light">Tell me what shape, luster, or weird anomaly you are searching for today.</p>
-      <button 
-        id="start-sourcing-btn" 
-        class="px-8 py-4 bg-stone-100 text-stone-950 font-mono text-xs tracking-widest uppercase rounded-lg hover:bg-[#E5C284] transition-colors duration-300 cursor-pointer"      >
-        Start a Sourcing Request
-    </button>
+      <!-- 🎯 纯正复刻：换成和 Process 一样的深色内敛底色，让原本的外壳高亮瞬间亮起 -->
+      <button id="start-sourcing-btn" class="relative bg-stone-950/60 text-[#E5C284] border border-stone-800/80 backdrop-blur-xs px-10 py-4 rounded font-serif tracking-widest text-sm uppercase transition-all duration-300">
+        
+        <!-- 保持你原汁原味的代码不动 -->
+        <div class="absolute inset-0 rounded border border-[#E5C284]/40 shadow-[0_0_15px_rgba(229,194,132,0.3)] animate-pulse pointer-events-none"></div>
+
+        <span class="relative z-10">
+          START A SOURCING REQUEST
+        </span>
+      </button>
     </div>
   </div>
 </section>

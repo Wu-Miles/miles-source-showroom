@@ -48,7 +48,6 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .category-title {
-  font-size: 1.6rem;
   letter-spacing: 2px;
   margin: 0;
 }
@@ -232,6 +231,7 @@ h1, h2, h3, h4, .font-serif {
   display: flex;
   gap: 32px;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior: smooth;
   scrollbar-width: none; /* 隐藏 Firefox 滚动条 */
   -ms-overflow-style: none;  /* 隐藏 IE/Edge 滚动条 */
